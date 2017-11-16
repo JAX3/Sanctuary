@@ -9,6 +9,15 @@ class General_Commands(object):
 		self.bot = bot
 
 
+	async def on_command(self, ctx):
+		'''
+		Provides a reaction for the default help command.
+		'''
+
+		if ctx.command.name == 'help':
+			await ctx.message.add_reaction('\N{OK HAND SIGN}')
+
+
 	@commands.command()
 	async def ping(self, ctx):
 		'''
@@ -26,7 +35,7 @@ class General_Commands(object):
 
 		try:
 			await ctx.author.send('You can invite your friends by using this link: ' + self.bot.config['Guild Invite'])
-			await ctx.message.add_reaction('👌')
+			await ctx.message.add_reaction('\N{OK HAND SIGN}')
 		except Exception:
 			await ctx.send('I tried to send you a PM, but you have them disabled. Please send me a DM first so I can run this command properly.')
 
@@ -38,8 +47,11 @@ class General_Commands(object):
 		'''
 
 		content = read_file('./Config/Schedule_Command.txt')
-		await ctx.author.send(content)
-		await ctx.message.add_reaction('👌')
+		try:
+			await ctx.author.send(content)
+			await ctx.message.add_reaction('\N{OK HAND SIGN}')
+		except Exception:
+			await ctx.send('I tried to send you a PM, but you have them disabled. Please send me a DM first so I can run this command properly.')
 
 
 def setup(bot:Bot):

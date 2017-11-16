@@ -20,7 +20,7 @@ class Admin_Commands(object):
 		'''
 
 		message = await ctx.send(content)
-		thumbs = ['👍', '👎']  # Thumbs up, thumbs down
+		thumbs = ['\N{THUMBS UP SIGN}', '\N{THUMBS DOWN SIGN}']  # Thumbs up, thumbs down
 		for r in thumbs:
 			await message.add_reaction(r)
 		await ctx.message.delete()
@@ -67,7 +67,7 @@ class Admin_Commands(object):
 
 		try:
 			await channel.send(content)
-			await ctx.message.add_reaction('👌')
+			await ctx.message.add_reaction('\N{OK HAND SIGN}')
 		except Exception:
 			await ctx.send("I don't have permission to talk in that channel ;-;")
 
@@ -83,10 +83,10 @@ class Admin_Commands(object):
 
 		try:
 			message = await channel.send(content)
-			thumbs = ['👍', '👎']  # Thumbs up, thumbs down
+			thumbs = ['\N{THUMBS UP SIGN}', '\N{THUMBS DOWN SIGN}']  # Thumbs up, thumbs down
 			for r in thumbs:
 				await message.add_reaction(r)
-			await ctx.message.add_reaction('👌')
+			await ctx.message.add_reaction('\N{OK HAND SIGN}')
 		except Exception:
 			await ctx.send("I don't have permission to talk in that channel ;-;")
 
@@ -100,7 +100,7 @@ class Admin_Commands(object):
 
 		write_file('./Config/Schedule_Command.txt', content)
 		# await ctx.send('The `schedule` command has been updated.')
-		await ctx.message.add_reaction('👌')
+		await ctx.message.add_reaction('\N{OK HAND SIGN}')
 
 
 def setup(bot:Bot):
