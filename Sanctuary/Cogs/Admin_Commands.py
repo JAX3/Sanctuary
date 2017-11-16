@@ -54,7 +54,7 @@ class Admin_Commands(object):
 		'''
 
 		await ctx.send(content)
-		# await ctx.message.add_reaction('👌')
+		await ctx.message.delete()
 
 	@commands.command()
 	@commands.has_any_role('Caleb', 'Administrators')
