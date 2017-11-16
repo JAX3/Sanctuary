@@ -1,4 +1,3 @@
-from random import choice
 from discord.ext import commands
 from Cogs.Utils.CustomBot import Bot
 
@@ -26,28 +25,24 @@ class Admin_Commands(object):
 		await ctx.message.delete()
 
 
-	@vote.error 
-	async def vote_error(self, ctx, error):
+	@commands.command(aliases=['delete', 'purge', 'destroy', 'murder'])
+	@commands.has_any_role('Caleb', 'Moderators', 'Administrators')
+	async def clear(self, ctx, amount:int):
 		'''
-		Runs when there is an error in the vote command
-		Either there's no content, or the user doesn't have the required permissions to run it
+		Removes a given number of messages from the current channel.
 		'''
 
-		if isinstance(error, commands.CheckFailure):
-			'''The check failed, they don't have permission'''
-			await ctx.send('You don\'t have permission to run this command.')
+		if amount < 1:
+			await ctx.send(".-.")
+			return 
+
+		if amount > 501:
+			await ctx.send("I'm sure you have no ill intent, but I don't feel comfortable deleting more than 500 messages at once. Sorry.")
 			return
 
-		elif isinstance(error, commands.MissingRequiredArgument):
-			'''Missing content'''
-			await ctx.send('Sorry, but you aren\'t using this commmand correctly. Please refer to the help command by running `help vote`.')
-			return
-
-		else:
-			raise error
-			return
+		await ctx.channel.purge(limit=amount+1)
 
 
 def setup(bot:Bot):
-	x = Administration(bot)
+	x = Admin_Commands(bot)
 	bot.add_cog(x)
