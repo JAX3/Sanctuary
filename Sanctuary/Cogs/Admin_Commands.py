@@ -1,6 +1,7 @@
 from discord import TextChannel
 from discord.ext import commands
 from Cogs.Utils.CustomBot import Bot
+from Cogs.Utils.FileHandling import write_file
 
 
 class Admin_Commands(object):
@@ -88,6 +89,18 @@ class Admin_Commands(object):
 			await ctx.message.add_reaction('👌')
 		except Exception:
 			await ctx.send("I don't have permission to talk in that channel ;-;")
+
+
+	@commands.command()
+	@commands.has_any_role('Caleb', 'Moderators', 'Administrators')
+	async def setschedule(self, ctx, *, content:str):
+		'''
+		Allows you to set the text output by the schedule command.
+		'''
+
+		write_file('./Config/Schedule_Command.txt', content)
+		# await ctx.send('The `schedule` command has been updated.')
+		await ctx.message.add_reaction('👌')
 
 
 def setup(bot:Bot):
