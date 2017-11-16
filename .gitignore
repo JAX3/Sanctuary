@@ -1,5 +1,6 @@
 # Project-Specific ignores
-Sanctuary/Config/Bot.json
+Sanctuary/Config/*
+!Sanctuary/Config/*.example
 
 
 # General Python shenanigans
