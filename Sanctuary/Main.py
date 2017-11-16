@@ -1,5 +1,5 @@
 from glob import glob
-from CustomBot import Bot
+from Cogs.Utils.CustomBot import Bot
 
 
 bot = Bot(
@@ -8,7 +8,12 @@ bot = Bot(
 
 
 # List all files in the Cogs directory that end in .py
-extensions = ['Cogs.' + i.split('/')[-1][:-3] for i in glob("./Cogs/*.py")]
+#extensions = [i.split('/')[-1][:-3].replace('\\', '.').replace('/', '.') for i in glob("./Cogs/*.py")]
+extensions = []
+for filepath in glob("./Cogs/*.py"):
+	file = filepath.replace('\\', '/').split('/')[-1]
+	filename = 'Cogs.' + file[:-3]
+	extensions.append(filename)
 
 
 @bot.event
@@ -23,7 +28,7 @@ async def on_ready():
 			print("Loaded extension", ext)
 		except Exception as e:
 			exc = '{}: {}'.format(type(e).__name__, e)
-			print('Failed to load extension {}\n{}'.format(ext, exc))
+			print('Failed to load extension {}\n    {}'.format(ext, exc))
 
 	print("All extensions loaded")
 
