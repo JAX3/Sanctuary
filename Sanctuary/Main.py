@@ -21,8 +21,8 @@ for filepath in glob("./Cogs/*.py"):
 @bot.event
 async def on_ready():
 	print("Booted and ready for action")
-	print(f" :: {bot.user}")
-	print(f" :: {bot.user.id}")
+	print(" :: {0.user}".format(bot))
+	print(" :: {0.user.id}".format(bot))
 	print()
 
 	for ext in extensions:
