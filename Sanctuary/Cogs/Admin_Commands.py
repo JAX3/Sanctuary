@@ -1,3 +1,4 @@
+from discord import TextChannel
 from discord.ext import commands
 from Cogs.Utils.CustomBot import Bot
 
@@ -41,6 +42,36 @@ class Admin_Commands(object):
 			return
 
 		await ctx.channel.purge(limit=amount+1)
+
+
+	@commands.command()
+	@commands.has_any_role('Caleb', 'Administrators')
+	async def echo(self, ctx, *, content:str):
+		'''
+		Echos a string back to you.
+		
+		This takes a line of text that you've given the bot, and spits it right back out to you in the same channel that you called it from.
+		'''
+
+		await ctx.send(content)
+		# await ctx.message.add_reaction('👌')
+
+	@commands.command()
+	@commands.has_any_role('Caleb', 'Administrators')
+	async def echointo(self, ctx, channel:TextChannel, *, content:str):
+		'''
+		Echos a string back to you.
+		
+		This takes a line of text that you've given the bot, and spits it right back out to you in the same channel that you called it from.
+		'''
+
+		try:
+			await channel.send(content)
+			await ctx.message.add_reaction('👌')
+		except Exception:
+			await ctx.send("I don't have permission to talk in that channel ;-;")
+
+
 
 
 def setup(bot:Bot):
