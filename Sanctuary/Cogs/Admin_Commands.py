@@ -15,8 +15,7 @@ class Admin_Commands(object):
 		'''
 		Adds a thumbs up/down emoji to the message you wrote.
 
-		This is useful for making votes for given things on your guild - an impartial bot view to help
-		with things for you.
+		This is useful for making votes for given things on your guild - an impartial bot view to help with things for you.
 		'''
 
 		message = await ctx.send(content)
@@ -60,9 +59,9 @@ class Admin_Commands(object):
 	@commands.has_any_role('Caleb', 'Administrators')
 	async def echointo(self, ctx, channel:TextChannel, *, content:str):
 		'''
-		Echos a string back to you.
+		Echos a string to a specified channel.
 		
-		This takes a line of text that you've given the bot, and spits it right back out to you in the same channel that you called it from.
+		This takes a line of text that you've given the bot, and spits it right back out to you in the same  channelthat you specified.
 		'''
 
 		try:
@@ -72,6 +71,23 @@ class Admin_Commands(object):
 			await ctx.send("I don't have permission to talk in that channel ;-;")
 
 
+	@commands.command()
+	@commands.has_any_role('Caleb', 'Moderators', 'Administrators')
+	async def voteinto(self, ctx, channel:TextChannel, *, content:str):
+		'''
+		Sends a message to a channel, then adds the thumbs up/down emojis to it.
+
+		This is useful for making votes for given things on your guild - an impartial bot view to help with things for you.
+		'''
+
+		try:
+			message = await channel.send(content)
+			thumbs = ['👍', '👎']  # Thumbs up, thumbs down
+			for r in thumbs:
+				await message.add_reaction(r)
+			await ctx.message.add_reaction('👌')
+		except Exception:
+			await ctx.send("I don't have permission to talk in that channel ;-;")
 
 
 def setup(bot:Bot):
