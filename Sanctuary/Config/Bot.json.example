@@ -1,4 +1,8 @@
 {
 	"Bot Token": "" ,
-	"Guild Invite": ""
+	"Guild Invite": "",
+	"Game": {
+		"Name": "/help",
+		"Type": 2
+	}
 }

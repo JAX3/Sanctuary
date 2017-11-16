@@ -1,4 +1,5 @@
 from glob import glob
+from discord import Game
 from Cogs.Utils.CustomBot import Bot
 
 
@@ -31,6 +32,9 @@ async def on_ready():
 			print('Failed to load extension {}\n    {}'.format(ext, exc))
 
 	print("All extensions loaded")
+
+	game = Game(name=bot.config['Game']['Name'], type=bot.config['Game']['Type'])
+	await bot.change_presence(game=game)
 
 
 bot.run_custom()

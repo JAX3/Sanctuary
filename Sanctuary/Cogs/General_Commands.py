@@ -24,7 +24,7 @@ class General_Commands(object):
 		'''
 
 		try:
-			await ctx.author.send('You can invite your friends by using this link:', self.bot.config['Guild Invite'])
+			await ctx.author.send('You can invite your friends by using this link: ' + self.bot.config['Guild Invite'])
 			await ctx.message.add_reaction('👌')
 		except Exception:
 			await ctx.send('I tried to send you a PM, but you have them disabled. Please send me a DM first so I can run this command properly.')
