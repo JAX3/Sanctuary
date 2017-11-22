@@ -53,7 +53,8 @@ class Admin_Commands(object):
 		This takes a line of text that you've given the bot, and spits it right back out to you in the same channel that you called it from.
 		'''
 
-		await ctx.send(content)
+		m = await ctx.send(content)
+		self.bot.last_message = m
 		await ctx.message.delete()
 
 	@commands.command()
@@ -66,7 +67,8 @@ class Admin_Commands(object):
 		'''
 
 		try:
-			await channel.send(content)
+			m = await channel.send(content)
+			self.bot.last_message = m
 			await ctx.message.add_reaction('\N{OK HAND SIGN}')
 		except Exception:
 			await ctx.send("I don't have permission to talk in that channel ;-;")
@@ -101,6 +103,29 @@ class Admin_Commands(object):
 		write_file('./Config/Schedule_Command.txt', content)
 		# await ctx.send('The `schedule` command has been updated.')
 		await ctx.message.add_reaction('\N{OK HAND SIGN}')
+
+
+	@commands.command()
+	async def edit(self, ctx, channel:TextChannel, message_id:str, *, new_message_content:str):
+		'''
+		Lets you edit a message that was made by the bot
+		'''
+
+		m = await channel.get_message(message_id)
+		await m.edit(content=new_message_content)	
+
+
+	@commands.command()
+	async def editlast(self, ctx, *, new_message_content:str):
+		'''
+		Lets you edit a message that was made by the bot
+		'''
+
+		if self.bot.last_message == None:
+			await ctx.send('I have no last cached message.')
+			return
+		m = self.bot.last_message
+		await m.edit(content=new_message_content)	
 
 
 def setup(bot:Bot):

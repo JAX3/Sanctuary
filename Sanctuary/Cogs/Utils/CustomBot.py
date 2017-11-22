@@ -7,6 +7,7 @@ class Bot(commands.AutoShardedBot):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
 		self.config = {}
+		self.last_message = None
 
 		with open('./Config/Bot.json') as a:
 			data = load(a)
