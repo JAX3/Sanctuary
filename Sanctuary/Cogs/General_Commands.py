@@ -9,6 +9,21 @@ class General_Commands(object):
 		self.bot = bot
 
 
+	async def on_message(self, message):
+		'''
+		No shouting at the bot
+		'''
+
+		if not message.content.startswith('/'):
+			return 
+
+		if True not in [message.content.lower()[1:].startswith(i) for i in [o.name for o in self.bot.commands]]:
+			return
+
+		if message.content.isupper():
+			await message.channel.send("There's no need to shout .-.")
+
+
 	async def on_command(self, ctx):
 		'''
 		Provides a reaction for the default help command.
@@ -24,7 +39,8 @@ class General_Commands(object):
 		The most original bot command.
 		'''
 
-		await ctx.send('Pong.')
+		# await ctx.send('Pong.')
+		await ctx.send('My latency is `{:.2f}ms`.'.format(self.bot.latency * 100))
 
 
 	@commands.command()
