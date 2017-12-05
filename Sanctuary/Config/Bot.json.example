@@ -4,5 +4,7 @@
 	"Game": {
 		"Name": "/help",
 		"Type": 2
-	}
+	},
+	"Twitter Bearer Token": "",
+	"Tweet Announcement Channel": 0
 }
