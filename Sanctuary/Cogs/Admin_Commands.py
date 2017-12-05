@@ -1,3 +1,4 @@
+from discord import TextChannel, Embed
 from discord import TextChannel
 from discord.ext import commands
 from Cogs.Utils.CustomBot import Bot
@@ -53,7 +54,7 @@ class Admin_Commands(object):
 		This takes a line of text that you've given the bot, and spits it right back out to you in the same channel that you called it from.
 		'''
 
-		m = await ctx.send(content)
+		m = await ctx.send(content.replace('{{EVERYONE}}', '@everyone'))
 		self.bot.last_message = m
 		await ctx.message.delete()
 
@@ -67,7 +68,7 @@ class Admin_Commands(object):
 		'''
 
 		try:
-			m = await channel.send(content)
+			m = await channel.send(content.replace('{{EVERYONE}}', '@everyone'))
 			self.bot.last_message = m
 			await ctx.message.add_reaction('\N{OK HAND SIGN}')
 		except Exception:
@@ -112,7 +113,7 @@ class Admin_Commands(object):
 		'''
 
 		m = await channel.get_message(message_id)
-		await m.edit(content=new_message_content)	
+		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'))	
 
 
 	@commands.command()
@@ -125,7 +126,7 @@ class Admin_Commands(object):
 			await ctx.send('I have no last cached message.')
 			return
 		m = self.bot.last_message
-		await m.edit(content=new_message_content)	
+		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'))	
 
 
 def setup(bot:Bot):
