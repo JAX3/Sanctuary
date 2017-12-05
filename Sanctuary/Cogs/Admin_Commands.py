@@ -1,5 +1,4 @@
 from discord import TextChannel, Embed
-from discord import TextChannel
 from discord.ext import commands
 from Cogs.Utils.CustomBot import Bot
 from Cogs.Utils.FileHandling import write_file
@@ -127,6 +126,17 @@ class Admin_Commands(object):
 			return
 		m = self.bot.last_message
 		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'))	
+
+
+	@commands.command()
+	@commands.has_any_role('Caleb')
+	async def embed(self, ctx, *, content:str):
+		'''
+		Creates an embed from raw JSON data
+		'''
+
+		e = Embed.from_data(eval(content))
+		await ctx.send(embed=e)
 
 
 def setup(bot:Bot):
