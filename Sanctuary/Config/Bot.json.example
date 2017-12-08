@@ -6,5 +6,11 @@
 		"Type": 2
 	},
 	"Twitter Bearer Token": "",
-	"Tweet Announcement Channel": 0
+	"Tweet Announcement Channel": 0,
+    "Database": {
+        "user": "",
+        "password": "",
+        "database": "sanctuary",
+        "host": "127.0.0.1"
+    },
 }

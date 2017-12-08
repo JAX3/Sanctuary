@@ -1,6 +1,6 @@
 from discord.ext import commands
-from Cogs.Utils.CustomBot import Bot
-from Cogs.Utils.FileHandling import read_file
+from Cogs.Utils.custom_bot import Bot
+from Cogs.Utils.file_handling import read_file
 
 
 class Join_Events(object):

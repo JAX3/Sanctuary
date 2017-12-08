@@ -1,7 +1,7 @@
 from discord import TextChannel, Embed
 from discord.ext import commands
-from Cogs.Utils.CustomBot import Bot
-from Cogs.Utils.FileHandling import write_file
+from Cogs.Utils.custom_bot import Bot
+from Cogs.Utils.file_handling import write_file
 
 
 class Admin_Commands(object):

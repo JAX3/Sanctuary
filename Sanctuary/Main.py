@@ -1,6 +1,6 @@
 from glob import glob
 from discord import Game
-from Cogs.Utils.CustomBot import Bot
+from Cogs.Utils.custom_bot import Bot
 
 
 bot = Bot(

@@ -1,5 +1,5 @@
 from discord.ext import commands
-from Cogs.Utils.CustomBot import Bot
+from Cogs.Utils.custom_bot import Bot
 
 
 class Error_Events(object):

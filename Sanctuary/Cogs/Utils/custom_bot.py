@@ -4,6 +4,7 @@ from json import load
 from aiohttp import ClientSession
 from discord import Embed
 from discord.ext import commands
+from Cogs.Utils.database import DatabaseConnection
 
 
 class Bot(commands.AutoShardedBot):
@@ -16,6 +17,8 @@ class Bot(commands.AutoShardedBot):
 		with open('./Config/Bot.json') as a:
 			data = load(a)
 		self.config = data 
+		self.database = DatabaseConnection
+		DatabaseConnection.config = data['Database']
 		self.session = ClientSession(loop=self.loop)
 		self.tweet_task = self.loop.create_task(self.get_latest_tweet())
 

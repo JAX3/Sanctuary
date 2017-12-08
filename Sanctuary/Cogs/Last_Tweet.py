@@ -2,7 +2,7 @@ from html import unescape
 from aiohttp import ClientSession
 from discord import Embed
 from discord.ext import commands
-from Cogs.Utils.CustomBot import Bot
+from Cogs.Utils.custom_bot import Bot
 
 
 class Last_Tweet(object):
