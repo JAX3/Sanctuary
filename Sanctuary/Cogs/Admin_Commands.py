@@ -1,4 +1,4 @@
-from discord import TextChannel, Embed
+from discord import TextChannel, Embed, File
 from discord.ext import commands
 from Cogs.Utils.custom_bot import Bot
 from Cogs.Utils.file_handling import write_file
@@ -46,28 +46,42 @@ class Admin_Commands(object):
 
 	@commands.command()
 	@commands.has_any_role('Caleb', 'Administrators')
-	async def echo(self, ctx, *, content:str):
+	async def echo(self, ctx, *, content:str=''):
 		'''
 		Echos a string back to you.
 		
 		This takes a line of text that you've given the bot, and spits it right back out to you in the same channel that you called it from.
 		'''
 
-		m = await ctx.send(content.replace('{{EVERYONE}}', '@everyone'))
+		if ctx.message.attachments:
+			file = ctx.message.attachments[0]
+			with open('CopyImage.png', 'wb') as a:
+				await file.save(a)
+			file = File('CopyImage.png')
+		else:
+			file = None
+		m = await ctx.send(content.replace('{{EVERYONE}}', '@everyone'), file=file)
 		self.bot.last_message = m
 		await ctx.message.delete()
 
 	@commands.command()
 	@commands.has_any_role('Caleb', 'Administrators')
-	async def echointo(self, ctx, channel:TextChannel, *, content:str):
+	async def echointo(self, ctx, channel:TextChannel, *, content:str=''):
 		'''
 		Echos a string to a specified channel.
 		
 		This takes a line of text that you've given the bot, and spits it right back out to you in the same  channelthat you specified.
 		'''
 
+		if ctx.message.attachments:
+			file = ctx.message.attachments[0]
+			with open('CopyImage.png', 'wb') as a:
+				await file.save(a)
+			file = File('CopyImage.png')
+		else:
+			file = None
 		try:
-			m = await channel.send(content.replace('{{EVERYONE}}', '@everyone'))
+			m = await channel.send(content.replace('{{EVERYONE}}', '@everyone'), file=file)
 			self.bot.last_message = m
 			await ctx.message.add_reaction('\N{OK HAND SIGN}')
 		except Exception:
@@ -106,26 +120,40 @@ class Admin_Commands(object):
 
 
 	@commands.command()
-	async def edit(self, ctx, channel:TextChannel, message_id:str, *, new_message_content:str):
+	async def edit(self, ctx, channel:TextChannel, message_id:str, *, new_message_content:str=''):
 		'''
 		Lets you edit a message that was made by the bot
 		'''
 
+		if ctx.message.attachments:
+			file = ctx.message.attachments[0]
+			with open('CopyImage.png', 'wb') as a:
+				await file.save(a)
+			file = File('CopyImage.png')
+		else:
+			file = None
 		m = await channel.get_message(message_id)
-		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'))	
+		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'), file=File)
 
 
 	@commands.command()
-	async def editlast(self, ctx, *, new_message_content:str):
+	async def editlast(self, ctx, *, new_message_content:str=''):
 		'''
 		Lets you edit a message that was made by the bot
 		'''
 
+		if ctx.message.attachments:
+			file = ctx.message.attachments[0]
+			with open('CopyImage.png', 'wb') as a:
+				await file.save(a)
+			file = File('CopyImage.png')
+		else:
+			file = None
 		if self.bot.last_message == None:
 			await ctx.send('I have no last cached message.')
 			return
 		m = self.bot.last_message
-		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'))	
+		await m.edit(content=new_message_content.replace('{{EVERYONE}}', '@everyone'), file=File)
 
 
 	@commands.command()
